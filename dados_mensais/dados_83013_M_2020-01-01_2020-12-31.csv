@@ -1,0 +1,24 @@
+Nome: MUNIZ FREIRE
+Codigo Estacao: 83013
+Latitude: -20.46583333
+Longitude: -41.41194444
+Altitude: 530
+Situacao: Operante
+Data Inicial: 2020-01-01
+Data Final: 2020-12-31
+Periodicidade da Medicao: Mensal
+
+data_medicao;nebulosidade;precipitacao;temperatura_maxima;temperatura_media;temperatura_minima;umidade_relativa;vento_maxima;vento_media;latitude;longitude;altitude
+2020-01-31;null;523,2;30,480645;null;20,841935;null;null;null;-20.46583333;-41.41194444;530
+2020-02-29;null;235,2;30,734483;null;20,27931;null;null;null;-20.46583333;-41.41194444;530
+2020-03-31;null;137,1;28,151613;null;18,970968;null;null;null;-20.46583333;-41.41194444;530
+2020-04-30;null;65,1;26,173333;null;17,83;null;null;null;-20.46583333;-41.41194444;530
+2020-05-31;null;126,2;25,858065;null;14,883871;null;null;null;-20.46583333;-41.41194444;530
+2020-06-30;null;33,8;26,35;null;14,086667;null;null;null;-20.46583333;-41.41194444;530
+2020-07-31;null;24,9;25,874194;null;14,219355;null;null;null;-20.46583333;-41.41194444;530
+2020-08-31;null;22,8;25,741935;null;14,390323;null;null;null;-20.46583333;-41.41194444;530
+2020-09-30;null;23;31,18;null;16,9;null;null;null;-20.46583333;-41.41194444;530
+2020-10-31;null;211,8;28,767742;null;19,322581;null;null;null;-20.46583333;-41.41194444;530
+2020-11-30;null;89,4;27,82;null;18,933333;null;null;null;-20.46583333;-41.41194444;530
+2020-12-31;null;192,9;30,806452;null;20,422581;null;null;null;-20.46583333;-41.41194444;530
+

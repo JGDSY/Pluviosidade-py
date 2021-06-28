@@ -1,0 +1,24 @@
+Nome: PELOTAS
+Codigo Estacao: 83985
+Latitude: -31.802527
+Longitude: -52.406868
+Altitude: 12.01
+Situacao: Operante
+Data Inicial: 2020-01-01
+Data Final: 2020-12-31
+Periodicidade da Medicao: Mensal
+
+data_medicao;nebulosidade;precipitacao;temperatura_maxima;temperatura_media;temperatura_minima;umidade_relativa;vento_maxima;vento_media;latitude;longitude;altitude
+2020-01-31;5,548387;38,5;29,332258;23,646452;19,106452;79,991935;6,3;3,384946;-31.802527;-52.406868;12.01
+2020-02-29;4,712644;32,2;29,351724;23,248276;18,541379;76,155172;8;3,501149;-31.802527;-52.406868;12.01
+2020-03-31;5,032258;38,8;29,277419;22,880645;18,290323;81,451613;6,6;3,12043;-31.802527;-52.406868;12.01
+2020-04-30;5,344444;101,8;24,813333;18,645333;14,553333;80,383333;9,5;3,668889;-31.802527;-52.406868;12.01
+2020-05-31;4,645161;91,1;21,793548;15,146452;10,393548;81,693548;8,6;2,873118;-31.802527;-52.406868;12.01
+2020-06-30;null;null;null;null;null;null;null;null;-31.802527;-52.406868;12.01
+2020-07-31;null;null;null;null;null;null;null;null;-31.802527;-52.406868;12.01
+2020-08-31;null;null;null;null;null;null;null;null;-31.802527;-52.406868;12.01
+2020-09-30;null;null;null;null;null;null;null;null;-31.802527;-52.406868;12.01
+2020-10-31;null;null;null;null;null;null;null;null;-31.802527;-52.406868;12.01
+2020-11-30;null;null;null;null;null;null;null;null;-31.802527;-52.406868;12.01
+2020-12-31;null;null;null;null;null;null;null;null;-31.802527;-52.406868;12.01
+

@@ -1,0 +1,24 @@
+Nome: FLORIANO
+Codigo Estacao: 82678
+Latitude: -6.76166666
+Longitude: -43.00333333
+Altitude: 126.6
+Situacao: Operante
+Data Inicial: 2020-01-01
+Data Final: 2020-12-31
+Periodicidade da Medicao: Mensal
+
+data_medicao;nebulosidade;precipitacao;temperatura_maxima;temperatura_media;temperatura_minima;umidade_relativa;vento_maxima;vento_media;latitude;longitude;altitude
+2020-01-31;7,983871;196,5;32,770968;27,338065;23,667742;79,895161;2,5722;,829742;-6.76166666;-43.00333333;126.6
+2020-02-29;6,767241;188,6;33,089655;27,244828;23,334483;81,232759;3,08664;,60905;-6.76166666;-43.00333333;126.6
+2020-03-31;null;null;32,347368;26,876667;23,31;85,368421;3,08664;null;-6.76166666;-43.00333333;126.6
+2020-04-30;null;null;null;null;null;null;null;null;-6.76166666;-43.00333333;126.6
+2020-05-31;null;null;null;null;null;null;null;null;-6.76166666;-43.00333333;126.6
+2020-06-30;null;null;null;null;null;null;null;null;-6.76166666;-43.00333333;126.6
+2020-07-31;null;null;null;null;null;null;null;null;-6.76166666;-43.00333333;126.6
+2020-08-31;null;null;null;null;null;null;null;null;-6.76166666;-43.00333333;126.6
+2020-09-30;null;null;null;null;null;null;null;null;-6.76166666;-43.00333333;126.6
+2020-10-31;null;null;null;null;null;null;null;null;-6.76166666;-43.00333333;126.6
+2020-11-30;null;null;null;null;null;null;null;null;-6.76166666;-43.00333333;126.6
+2020-12-31;null;null;null;null;null;null;null;null;-6.76166666;-43.00333333;126.6
+

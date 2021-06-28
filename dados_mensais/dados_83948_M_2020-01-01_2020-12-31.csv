@@ -1,0 +1,24 @@
+Nome: TORRES
+Codigo Estacao: 83948
+Latitude: -29.35027777
+Longitude: -49.71666666
+Altitude: 4.66
+Situacao: Fechada
+Data Inicial: 2020-01-01
+Data Final: 2020-12-31
+Periodicidade da Medicao: Mensal
+
+data_medicao;nebulosidade;precipitacao;temperatura_maxima;temperatura_media;temperatura_minima;umidade_relativa;vento_maxima;vento_media;latitude;longitude;altitude
+2020-01-31;6,301075;181,2;28,567742;24,296129;20,845161;81,870968;6;1,634409;-29.35027777;-49.71666666;4.66
+2020-02-29;5,149425;61,3;27,682759;23,614483;19,741379;79,336207;7;1,806897;-29.35027777;-49.71666666;4.66
+2020-03-31;4,139785;19,5;28,112903;23,720645;19,522581;80,629032;5;1,731183;-29.35027777;-49.71666666;4.66
+2020-04-30;3,7;52,1;26,266667;20,624;15,72;76,891667;10,3;2,007778;-29.35027777;-49.71666666;4.66
+2020-05-31;null;null;null;null;null;null;null;null;-29.35027777;-49.71666666;4.66
+2020-06-30;null;null;null;null;null;null;null;null;-29.35027777;-49.71666666;4.66
+2020-07-31;null;null;null;null;null;null;null;null;-29.35027777;-49.71666666;4.66
+2020-08-31;null;null;null;null;null;null;null;null;-29.35027777;-49.71666666;4.66
+2020-09-30;null;null;null;null;null;null;null;null;-29.35027777;-49.71666666;4.66
+2020-10-31;null;null;null;null;null;null;null;null;-29.35027777;-49.71666666;4.66
+2020-11-30;null;null;null;null;null;null;null;null;-29.35027777;-49.71666666;4.66
+2020-12-31;6,344086;147,1;26,858065;23,085161;19,787097;82,919355;6,17328;2,184987;-29.35027777;-49.71666666;4.66
+

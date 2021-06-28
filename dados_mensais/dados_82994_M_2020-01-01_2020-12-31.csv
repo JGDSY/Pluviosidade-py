@@ -1,0 +1,24 @@
+Nome: MACEIO
+Codigo Estacao: 82994
+Latitude: -9.55138888
+Longitude: -35.77083332
+Altitude: 84.12
+Situacao: Fechada
+Data Inicial: 2020-01-01
+Data Final: 2020-12-31
+Periodicidade da Medicao: Mensal
+
+data_medicao;nebulosidade;precipitacao;temperatura_maxima;temperatura_media;temperatura_minima;umidade_relativa;vento_maxima;vento_media;latitude;longitude;altitude
+2020-01-31;6,895833;5;null;null;22,746429;null;null;null;-9.55138888;-35.77083332;84.12
+2020-02-29;null;null;null;null;null;null;null;null;-9.55138888;-35.77083332;84.12
+2020-03-31;7,279412;198;null;null;22,715385;null;null;null;-9.55138888;-35.77083332;84.12
+2020-04-30;7,55102;137,7;null;null;22,657692;null;null;null;-9.55138888;-35.77083332;84.12
+2020-05-31;7,475962;240,8;null;null;22,319231;null;null;null;-9.55138888;-35.77083332;84.12
+2020-06-30;7,485577;148,4;null;null;21,730769;null;null;null;-9.55138888;-35.77083332;84.12
+2020-07-31;7,004717;77,3;null;null;21,696296;null;null;null;-9.55138888;-35.77083332;84.12
+2020-08-31;7,043269;47,4;null;null;20,575;null;null;null;-9.55138888;-35.77083332;84.12
+2020-09-30;6,85;45;null;null;21,9;null;null;null;-9.55138888;-35.77083332;84.12
+2020-10-31;6,862745;3,7;null;null;22,326923;null;null;null;-9.55138888;-35.77083332;84.12
+2020-11-30;7,109375;7,5;null;null;22,16;null;null;null;-9.55138888;-35.77083332;84.12
+2020-12-31;7,36413;32,3;null;null;21,334615;null;null;null;-9.55138888;-35.77083332;84.12
+

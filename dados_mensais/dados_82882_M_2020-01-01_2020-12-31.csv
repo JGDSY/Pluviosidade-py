@@ -1,0 +1,24 @@
+Nome: PAULISTANA
+Codigo Estacao: 82882
+Latitude: -8.13222221
+Longitude: -41.14305555
+Altitude: 376
+Situacao: Operante
+Data Inicial: 2020-01-01
+Data Final: 2020-12-31
+Periodicidade da Medicao: Mensal
+
+data_medicao;nebulosidade;precipitacao;temperatura_maxima;temperatura_media;temperatura_minima;umidade_relativa;vento_maxima;vento_media;latitude;longitude;altitude
+2020-01-31;4,811321;238,7;31,534615;27,194615;24,681481;88,076923;5,1444;1,681823;-8.13222221;-41.14305555;376
+2020-02-29;4,413265;184,8;31,520833;26,9975;24,688;89,708333;5,1444;1,994767;-8.13222221;-41.14305555;376
+2020-03-31;null;null;30,78;null;24,077778;93,133333;5,65884;null;-8.13222221;-41.14305555;376
+2020-04-30;null;null;null;null;null;null;null;null;-8.13222221;-41.14305555;376
+2020-05-31;null;null;null;null;null;null;null;null;-8.13222221;-41.14305555;376
+2020-06-30;null;null;null;null;null;null;null;null;-8.13222221;-41.14305555;376
+2020-07-31;null;null;null;null;null;null;null;null;-8.13222221;-41.14305555;376
+2020-08-31;null;null;null;null;null;null;null;null;-8.13222221;-41.14305555;376
+2020-09-30;null;null;null;null;null;null;null;null;-8.13222221;-41.14305555;376
+2020-10-31;null;null;null;null;null;null;null;null;-8.13222221;-41.14305555;376
+2020-11-30;null;null;null;null;null;null;null;null;-8.13222221;-41.14305555;376
+2020-12-31;null;null;null;null;null;null;null;null;-8.13222221;-41.14305555;376
+

@@ -11,20 +11,22 @@ periodo_Q2 = pd.to_datetime('2020-06-30')
 periodo_Q3 = pd.to_datetime('2020-09-30')
 periodo_Q4 = pd.to_datetime('2020-12-31')
 
-path = "dados_mensais" # use your path
-all_files = glob.glob(path + "/*.csv")
+path = "dados_mensais/dados_mensais.csv"
+df = pd.read_csv(path, index_col=None, header=0, sep=';')
 
-li = []
+df.data_medicao = pd.to_datetime(df.data_medicao)
 
-for filename in all_files:
-    df = pd.read_csv(filename, index_col=None, header=9, sep=';')
-    li.append(df)
+df_periodo = df.loc[df.precipitacao.notnull()].loc[df.data_medicao <= periodo_Q1]
 
-frame = pd.concat(li, axis=0, ignore_index=True)
-frame.data_medicao = pd.to_datetime(frame.data_medicao)
-frame.precipitacao.notnull()
 
-df_Q1 = frame.loc[frame.precipitacao.notnull()].loc[frame.data_medicao <= periodo_Q1].groupby(['latitude', 'longitude', 'altitude'])
+#print(df_periodo)
+#print(df.info())
 
-print(df_Q1.head())
-#print(frame.info())
+#plt.scatter(df_periodo.longitude, df_periodo.latitude)
+#plt.show()
+
+#fig = sns.FacetGrid(df_periodo, hue=df_periodo.precipitacao, palette=sns.color_palette("ch:s=.25,rot=-.25", as_cmap=True))
+
+
+fig = sns.scatterplot(x=df_periodo.longitude,y=df_periodo.latitude, hue=df_periodo.precipitacao, palette=sns.color_palette("ch:s=.25,rot=-.25", as_cmap=True))
+plt.show()

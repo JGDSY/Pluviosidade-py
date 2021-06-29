@@ -9,9 +9,9 @@ Data Final: 2020-12-31
 Periodicidade da Medicao: Mensal
 
 data_medicao;nebulosidade;precipitacao;temperatura_maxima;temperatura_media;temperatura_minima;umidade_relativa;vento_maxima;vento_media;latitude;longitude;altitude
-2020-01-31;7,322581;215,3;30,806452;null;20,212903;null;null;null;-22.45111111;-44.44472221;439.9
-2020-02-29;7,827586;360,1;29,203448;null;20,22069;null;null;null;-22.45111111;-44.44472221;439.9
-2020-03-31;6,25;null;null;null;19,23913;null;null;null;-22.45111111;-44.44472221;439.9
+2020-01-31;7.322581;215.3;30.806452;null;20.212903;null;null;null;-22.45111111;-44.44472221;439.9
+2020-02-29;7.827586;360.1;29.203448;null;20.22069;null;null;null;-22.45111111;-44.44472221;439.9
+2020-03-31;6.25;null;null;null;19.23913;null;null;null;-22.45111111;-44.44472221;439.9
 2020-04-30;null;null;null;null;null;null;null;null;-22.45111111;-44.44472221;439.9
 2020-05-31;null;null;null;null;null;null;null;null;-22.45111111;-44.44472221;439.9
 2020-06-30;null;null;null;null;null;null;null;null;-22.45111111;-44.44472221;439.9
@@ -20,5 +20,5 @@ data_medicao;nebulosidade;precipitacao;temperatura_maxima;temperatura_media;temp
 2020-09-30;null;null;null;null;null;null;null;null;-22.45111111;-44.44472221;439.9
 2020-10-31;null;null;null;null;null;null;null;null;-22.45111111;-44.44472221;439.9
 2020-11-30;null;null;null;null;null;null;null;null;-22.45111111;-44.44472221;439.9
-2020-12-31;7,983871;676,8;null;null;19,966667;null;null;null;-22.45111111;-44.44472221;439.9
+2020-12-31;7.983871;676.8;null;null;19.966667;null;null;null;-22.45111111;-44.44472221;439.9
 

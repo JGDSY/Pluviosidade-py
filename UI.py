@@ -1,9 +1,10 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTabWidget, QWidget, QComboBox, QHBoxLayout, QGroupBox, QVBoxLayout
-from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import *
+from PyQt5 import QtGui, QtCore
+import matplotlib as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
+import plot
 
 class App(QMainWindow):
     
@@ -13,7 +14,7 @@ class App(QMainWindow):
         self.left = 300
         self.top = 100
         self.width = 640
-        self.height = 400
+        self.height = 600
         #self.UiComponents()
         self.initUI()
 
@@ -59,6 +60,9 @@ class TabsWidget(QWidget):
         super(QWidget, self).__init__(parent)
         self.layout = QVBoxLayout(self)
         
+        # Objeto com plot e Dataframe
+        self.backend = plot.Visualizer()
+
         # Criar abas
         self.tabs = QTabWidget()
         self.tab_mapa = QWidget()
@@ -79,22 +83,43 @@ class TabsWidget(QWidget):
         tab_mapa_bt_layout.addWidget(self.tab_mapa.cmb_variavel)
 
         self.tab_mapa.cmb_periodo = QComboBox()
+        self.tab_mapa.cmb_periodo.name = "cmb_periodo"
         cmb_periodo_list = ["Q1", "Q2", "Q3", "Q4"]
         self.tab_mapa.cmb_periodo.addItems(cmb_periodo_list)
         tab_mapa_bt_layout.addWidget(self.tab_mapa.cmb_periodo)
+        self.tab_mapa.cmb_periodo.activated.connect(self.periodo_onchange)
         
         self.tab_mapa.horizontalGroupBox.setLayout(tab_mapa_bt_layout)
 
-        # Elemento gráfico
-        self.tab_mapa.plot_mapa = Figure()
+        # Elementos gráficos
+        self.backend.definir_periodo(0,1)
+
+        self.tab_mapa.figure = FigureCanvas()
+        self.tab_mapa.figure = self.plot_grafico(self.tab_mapa.figure)
 
         self.tab_mapa.layout = QVBoxLayout()
         self.tab_mapa.layout.addWidget(self.tab_mapa.horizontalGroupBox)
+        self.tab_mapa.layout.addWidget(self.tab_mapa.figure)
         self.tab_mapa.setLayout(self.tab_mapa.layout)
 
+        #self.tab_mapa.canvas.draw()
         # Adicionar abas
         self.layout.addWidget(self.tabs)
         self.setLayout(self.layout)
+
+    def plot_grafico(self, figure_canvas):
+        # Elemento gráfico
+        figure = self.backend.plot_periodo()
+        figure_canvas = FigureCanvas(figure)
+        return figure_canvas
+
+    def periodo_onchange(self):
+        if(self.tab_mapa.cmb_periodo.currentIndex() == 0):
+            self.backend.definir_periodo(0,self.tab_mapa.cmb_periodo.currentIndex())
+        else:
+            self.backend.definir_periodo(self.tab_mapa.cmb_periodo.currentIndex() - 1,self.tab_mapa.cmb_periodo.currentIndex())
+        self.tab_mapa.figure = self.plot_grafico(self.tab_mapa.figure)
+        self.tab_mapa.figure.draw()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

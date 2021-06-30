@@ -2,31 +2,37 @@ from os import sep
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+from pandas.core.frame import DataFrame
 import seaborn as sns
 
-import glob
+class Visualizer():
+    periodo = [pd.to_datetime('2020-03-31'), 
+                pd.to_datetime('2020-06-30'),
+                pd.to_datetime('2020-09-30'),
+                pd.to_datetime('2020-12-31')]
+    df = pd.DataFrame()
+    df_periodo = pd.DataFrame()
 
-periodo_Q1 = pd.to_datetime('2020-03-31')
-periodo_Q2 = pd.to_datetime('2020-06-30')
-periodo_Q3 = pd.to_datetime('2020-09-30')
-periodo_Q4 = pd.to_datetime('2020-12-31')
+    def __init__(self):
+        path = "dados_mensais/dados_mensais.csv"
+        self.df = pd.read_csv(path, index_col=None, header=0, sep=';')
 
-path = "dados_mensais/dados_mensais.csv"
-df = pd.read_csv(path, index_col=None, header=0, sep=';')
+        self.df.data_medicao = pd.to_datetime(self.df.data_medicao)
 
-df.data_medicao = pd.to_datetime(df.data_medicao)
+    def definir_periodo(self, inicio:int, fim:int):
+        if not inicio:
+            self.df_periodo = self.df.loc[self.df.precipitacao.notnull()].loc[self.df.data_medicao <= self.periodo[fim]]
+        else:
+            self.df_periodo = self.df.loc[self.df.precipitacao.notnull()].loc[self.df.data_medicao >= self.periodo[inicio]].loc[self.df.data_medicao <= self.periodo[fim]]
+        
+    def plot_periodo(self):
+        fig = sns.scatterplot(x=self.df_periodo.longitude, y=self.df_periodo.latitude, hue=self.df_periodo.precipitacao, palette=sns.color_palette("ch:s=.25,rot=-.25", as_cmap=True))
+        plt.show()
+        return fig.get_figure()
+    #print(df_periodo)
+    #print(df.info())
 
-df_periodo = df.loc[df.precipitacao.notnull()].loc[df.data_medicao <= periodo_Q1]
+    #plt.scatter(df_periodo.longitude, df_periodo.latitude)
+    #plt.show()
 
-
-#print(df_periodo)
-#print(df.info())
-
-#plt.scatter(df_periodo.longitude, df_periodo.latitude)
-#plt.show()
-
-#fig = sns.FacetGrid(df_periodo, hue=df_periodo.precipitacao, palette=sns.color_palette("ch:s=.25,rot=-.25", as_cmap=True))
-
-
-fig = sns.scatterplot(x=df_periodo.longitude,y=df_periodo.latitude, hue=df_periodo.precipitacao, palette=sns.color_palette("ch:s=.25,rot=-.25", as_cmap=True))
-plt.show()
+    #fig = sns.FacetGrid(df_periodo, hue=df_periodo.precipitacao, palette=sns.color_palette("ch:s=.25,rot=-.25", as_cmap=True))

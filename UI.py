@@ -21,6 +21,7 @@ class App(QMainWindow):
     def initUI(self):
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
+        self.setFixedSize(self.width, self.height)
         
         #mainMenu = self.menuBar()
         #fileMenu = mainMenu.addMenu('File')
@@ -29,9 +30,6 @@ class App(QMainWindow):
         #searchMenu = mainMenu.addMenu('Search')
         #toolsMenu = mainMenu.addMenu('Tools')
         #helpMenu = mainMenu.addMenu('Help')
-
-        self.table_widget = TabsWidget(self)
-        self.setCentralWidget(self.table_widget)
         
         #exitButton = QAction(QIcon('exit24.png'), 'Exit', self)
         #exitButton.setShortcut('Ctrl+Q')
@@ -39,21 +37,9 @@ class App(QMainWindow):
         #exitButton.triggered.connect(self.close)
         #fileMenu.addAction(exitButton)
         
+        self.table_widget = TabsWidget(self)
+        self.setCentralWidget(self.table_widget)
         self.show()
-
-    def UiComponents(self):
-        # creating a combo box widget
-        self.combo_box = QComboBox(self)
-        # setting geometry of combo box
-        self.combo_box.setGeometry(200, 150, 150, 30)
-        # geek list
-        options_list = ["Pluviosidade", "Temperatura"]
-        # making it editable
-        self.combo_box.setEditable(False)
-        # adding list of items to combo box
-        self.combo_box.addItems(options_list)
-        # setting minimum content length
-        self.combo_box.setMinimumContentsLength(3)
 
 class TabsWidget(QWidget):
     def __init__(self, parent):
@@ -62,6 +48,7 @@ class TabsWidget(QWidget):
         
         # Objeto com plot e Dataframe
         self.backend = plot.Visualizer()
+        self.variavel = "precipitacao"
 
         # Criar abas
         self.tabs = QTabWidget()
@@ -78,21 +65,29 @@ class TabsWidget(QWidget):
         
         # Elementos de Input
         self.tab_mapa.cmb_variavel = QComboBox(self)
-        cmb_variaveis_list = ["Pluviosidade", "Temperatura", "Nebulosidade", "Vel. Média do Vento"]
+        cmb_variaveis_list = ["Precipitação", "Temperatura", "Nebulosidade", "Vel. Média do Vento"]
         self.tab_mapa.cmb_variavel.addItems(cmb_variaveis_list)
         tab_mapa_bt_layout.addWidget(self.tab_mapa.cmb_variavel)
+        self.tab_mapa.cmb_variavel.activated.connect(self.variavel_onchange)
 
-        self.tab_mapa.cmb_periodo = QComboBox()
-        self.tab_mapa.cmb_periodo.name = "cmb_periodo"
-        cmb_periodo_list = ["Q1", "Q2", "Q3", "Q4"]
-        self.tab_mapa.cmb_periodo.addItems(cmb_periodo_list)
-        tab_mapa_bt_layout.addWidget(self.tab_mapa.cmb_periodo)
-        self.tab_mapa.cmb_periodo.activated.connect(self.periodo_onchange)
+        self.tab_mapa.cmb_periodo_inicio = QComboBox()
+        cmb_periodo_inicio_list = ["Início do ano", "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+                                    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
+        self.tab_mapa.cmb_periodo_inicio.addItems(cmb_periodo_inicio_list)
+        tab_mapa_bt_layout.addWidget(self.tab_mapa.cmb_periodo_inicio)
+        self.tab_mapa.cmb_periodo_inicio.activated.connect(self.periodo_onchange)
+
+        self.tab_mapa.cmb_periodo_final = QComboBox()
+        cmb_periodo_final_list = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+                                    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
+        self.tab_mapa.cmb_periodo_final.addItems(cmb_periodo_final_list)
+        tab_mapa_bt_layout.addWidget(self.tab_mapa.cmb_periodo_final)
+        self.tab_mapa.cmb_periodo_final.activated.connect(self.periodo_onchange)
         
         self.tab_mapa.horizontalGroupBox.setLayout(tab_mapa_bt_layout)
 
         # Elementos gráficos
-        self.backend.definir_periodo(0,1)
+        self.backend.definir_periodo(0,1, self.variavel)
 
         self.tab_mapa.figure = FigureCanvas()
         self.tab_mapa.figure = self.plot_grafico(self.tab_mapa.figure)
@@ -102,7 +97,6 @@ class TabsWidget(QWidget):
         self.tab_mapa.layout.addWidget(self.tab_mapa.figure)
         self.tab_mapa.setLayout(self.tab_mapa.layout)
 
-        #self.tab_mapa.canvas.draw()
         # Adicionar abas
         self.layout.addWidget(self.tabs)
         self.setLayout(self.layout)
@@ -114,12 +108,26 @@ class TabsWidget(QWidget):
         return figure_canvas
 
     def periodo_onchange(self):
-        if(self.tab_mapa.cmb_periodo.currentIndex() == 0):
-            self.backend.definir_periodo(0,self.tab_mapa.cmb_periodo.currentIndex())
+        # Condição para primeiro periodo ou intervalo
+        if(self.tab_mapa.cmb_periodo_inicio.currentIndex() -1 > self.tab_mapa.cmb_periodo_final.currentIndex()):
+            self.tab_mapa.cmb_periodo_final.setCurrentIndex(self.tab_mapa.cmb_periodo_inicio.currentIndex() -1)
+        if(self.tab_mapa.cmb_periodo_inicio.currentIndex() == 0):
+            self.backend.definir_periodo(0,self.tab_mapa.cmb_periodo_final.currentIndex(), self.variavel)
         else:
-            self.backend.definir_periodo(self.tab_mapa.cmb_periodo.currentIndex() - 1,self.tab_mapa.cmb_periodo.currentIndex())
+            self.backend.definir_periodo(self.tab_mapa.cmb_periodo_inicio.currentIndex() - 1,self.tab_mapa.cmb_periodo_final.currentIndex(), self.variavel)
+        # Limpar o canvas e adicionar novamente
+        self.tab_mapa.layout.removeWidget(self.tab_mapa.figure)
         self.tab_mapa.figure = self.plot_grafico(self.tab_mapa.figure)
         self.tab_mapa.figure.draw()
+        self.tab_mapa.layout.addWidget(self.tab_mapa.figure)
+
+    def variavel_onchange(self):
+        variavel_pre = self.tab_mapa.cmb_variavel.currentIndex()
+        if(variavel_pre == 0): self.variavel = "precipitacao"
+        if(variavel_pre == 1): self.variavel = "temperatura_media"
+        if(variavel_pre == 2): self.variavel = "nebulosidade"
+        if(variavel_pre == 3): self.variavel = "vento_media"
+        self.periodo_onchange()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

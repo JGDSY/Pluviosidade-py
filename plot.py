@@ -44,8 +44,9 @@ class Visualizer:
                     self.variable_map].mean().reset_index()
 
     def plot_period_map(self):
+        plt.close()
         title, color = get_variable_title(self.variable_map)
-        plt.clf()
+        plt.figure(clear=True)
         graph = sns.scatterplot(data=self.df_period, x="longitude", y="latitude", s=11, hue=self.variable_map,
                                 palette=sns.color_palette(color, as_cmap=True))
         graph.set_ylim(bottom=-35, top=5)
@@ -56,20 +57,23 @@ class Visualizer:
 
     # Plot de variáveis por associação
     def plot_association(self, variables: list):
-        plt.clf()
+        plt.close()
+        plt.figure(clear=True)
         df_association = self.df[self.df[variables[0]] != 0].loc[self.df[variables[1]] != 0].dropna()
         slope, intercept, r_value, p_value, std_err = stats.linregress(df_association[variables[0]],df_association[variables[1]])
+        regression = ""
         if variables[-2]:
+            plt.autoscale(True)
             graph = sns.lmplot(data=df_association,
                                x=variables[0],
                                y=variables[1],
                                line_kws={'color': 'red'},
                                lowess=variables[-1],
-                               height=4,
-                               legend="coeficiente: {0:.2f}".format(slope))
-            #graph.set_xlabel(get_variable_title(variables[0])[0])
-            #graph.set_ylabel(get_variable_title(variables[1])[0])
-            return graph.fig
+                               height=4, aspect=465/308)
+            graph.set_axis_labels(x_var=get_variable_title(variables[0])[0],
+                                  y_var=get_variable_title(variables[1])[0])
+            regression = "y = {0:.3f}x + {1:.2f}".format(slope, intercept) if not variables[-1] else ""
+            return graph.fig, regression
         else:
             if not variables[2]:
                 graph = sns.scatterplot(data=df_association,
@@ -83,7 +87,8 @@ class Visualizer:
                                         palette=sns.color_palette("ch:s=.25,rot=-.25", as_cmap=True))
         graph.set_xlabel(get_variable_title(variables[0])[0])
         graph.set_ylabel(get_variable_title(variables[1])[0])
-        return graph.get_figure()
+        if variables[2]: graph.legend(title=get_variable_title(variables[2])[0])
+        return graph.get_figure(), regression
 
     def plot_map_web(self):
         max_value = self.df_period[self.variable_map].max()
@@ -91,26 +96,32 @@ class Visualizer:
 
         if self.variable_map == "precipitacao":
             color_str = "rgba(35,100,200,"
-        elif self.variable_map == "temperatura_media":
+        elif "temperatura" in self.variable_map:
             color_str = "rgba(145,35,10,"
         elif self.variable_map == "nebulosidade":
             color_str = "rgba(35,150,35,"
-        elif self.variable_map == "vento_media":
+        elif "vento" in self.variable_map:
             color_str = "rgba(50,50,50,"
+        elif self.variable_map == "umidade_relativa":
+            color_str = "rgba(35,100,230,"
 
         m = folium.Map(location=[-15.7648084, -47.8878119],
                        zoom_start=5)
-        for row in self.df_period.iterrows():
-            popup_text = '{}: {}'
-            popup_text = popup_text.format(self.variable_map,
-                                           row[self.variable_map])
+        for index, row in self.df_period.iterrows():
+            # formatação do popup
+            popup_text = '<b>{}:</b><br> {}'.format(get_variable_title(self.variable_map)[0],
+                                           round(row[self.variable_map],2))
+            popup_text = str(popup_text.encode ('raw_unicode_escape'))[2:-1]
+
             folium.CircleMarker([row['latitude'], row['longitude']],
                                 radius=2,
                                 fill=True,
                                 color=color_str +
                                       str((row[self.variable_map] - min_value) / (max_value - min_value)) +
                                       ")",
-                                popup=popup_text).add_to(m)
+                                popup=folium.Popup(popup_text,
+                                                   min_width=150,
+                                                   max_width=200)).add_to(m)
 
         data = io.BytesIO()
         m.save(data, close_file=False)
@@ -134,4 +145,16 @@ def get_variable_title(variable):
         if variable == "vento_media":
             title = "Velocidade do vento(m/s)"
             color = "Greys"
+        if variable == "vento_maxima":
+            title = "Velocidade do vento(m/s)"
+            color = "Greys"
+        if variable == "temperatura_maxima":
+            title = "Temperatura Máxima (ºC)"
+            color = "Reds"
+        if variable == "temperatura_minima":
+            title = "Temperatura Mínima (ºC)"
+            color = "Reds"
+        if variable == "umidade_relativa":
+            title = "Temperatura Média (%)"
+            color = "Blues"
         return title, color

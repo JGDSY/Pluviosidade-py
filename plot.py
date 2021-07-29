@@ -155,6 +155,6 @@ def get_variable_title(variable):
             title = "Temperatura Mínima (ºC)"
             color = "Reds"
         if variable == "umidade_relativa":
-            title = "Temperatura Média (%)"
+            title = "Umidade Relativa (%)"
             color = "Blues"
         return title, color
